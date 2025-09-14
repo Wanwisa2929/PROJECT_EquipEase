@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const itemsData = [
   { id: 1, name: "Football", img: "/images/Football.jpg" },
   { id: 2, name: "Volleyball", img: "/images/Volleyball.jpg" },
