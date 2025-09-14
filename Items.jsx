@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-
+ 
 const LS_KEYS = {
   ITEMS: "eq_items_v2",
   BORROWING: "eq_borrowing",
   HISTORY: "eq_history",
 };
-
+ 
 function readLS(key, fallback) {
-  try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } 
+  try { return JSON.parse(localStorage.getItem(key)) ?? fallback; }
   catch { return fallback; }
 }
 function writeLS(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
-
+ 
 const DEFAULT_ITEMS = [
   { id:1, name:"Football", type:"Ball", remaining:10 },
   { id:2, name:"Volleyball", type:"Ball", remaining:10 },
@@ -21,12 +21,12 @@ const DEFAULT_ITEMS = [
   { id:5, name:"Petanque Ball", type:"Ball", remaining:10 },
   { id:6, name:"Futsal Ball", type:"Ball", remaining:10 },
 ];
-
+ 
 export default function Items() {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const itemId = Number(query.get("id"));
-
+ 
   const [items, setItems] = useState([]);
   const [popupItem, setPopupItem] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -36,7 +36,7 @@ export default function Items() {
     borrowDate: "",
     returnDate: "",
   });
-
+ 
   useEffect(()=>{
     let data = readLS(LS_KEYS.ITEMS, []);
     if(data.length === 0){
@@ -44,36 +44,36 @@ export default function Items() {
       writeLS(LS_KEYS.ITEMS, data);
     }
     setItems(data);
-
+ 
     if(itemId){
       const target = data.find(it=>it.id===itemId);
       if(target) openPopup(target);
     }
   },[]);
-
+ 
   function openPopup(item){
     setPopupItem(item);
     const today = new Date().toISOString().slice(0,10);
     setFormData(f=>({...f, borrowDate:today, returnDate:today}));
   }
-
+ 
   function closePopup(){ setPopupItem(null); }
-
+ 
   function handleSubmit(e){
     e.preventDefault();
     const { studentId, studentName, borrowDate, returnDate } = formData;
     if(!studentId || !studentName){ return alert("กรุณากรอกข้อมูลให้ครบ"); }
-
+ 
     const allItems = readLS(LS_KEYS.ITEMS, []);
     const target = allItems.find(it=>it.id===popupItem.id);
     if(!target) return;
-
+ 
     if(target.remaining <= 0){ return alert("อุปกรณ์หมด"); }
-
+ 
     target.remaining -= 1;
     writeLS(LS_KEYS.ITEMS, allItems);
     setItems(allItems);
-
+ 
     const borrowId = Date.now();
     const borrowing = readLS(LS_KEYS.BORROWING, []);
     borrowing.push({
@@ -87,15 +87,15 @@ export default function Items() {
       status: "Borrowed"
     });
     writeLS(LS_KEYS.BORROWING, borrowing);
-
+ 
     const history = readLS(LS_KEYS.HISTORY, []);
     history.push({...borrowing[borrowing.length-1], returnTime:""});
     writeLS(LS_KEYS.HISTORY, history);
-
+ 
     setShowSuccess(true);
     closePopup();
   }
-
+ 
   return (
     <main className="content">
       <h1>Items List</h1>
@@ -115,7 +115,7 @@ export default function Items() {
                 <td>{it.name}</td>
                 <td>{it.type}</td>
                 <td>
-                  {it.remaining>0 ? 
+                  {it.remaining>0 ?
                     <span className="status available" onClick={()=>openPopup(it)}>Available</span> :
                     <span className="status borrowed">Out of stock</span>
                   }
@@ -126,7 +126,7 @@ export default function Items() {
           </tbody>
         </table>
       </div>
-
+ 
       {/* Popup Form */}
       {popupItem && (
         <div className="popup-overlay">
@@ -147,7 +147,7 @@ export default function Items() {
           </div>
         </div>
       )}
-
+ 
       {/* Popup Success */}
       {showSuccess && (
         <div className="popup-overlay">
@@ -161,3 +161,5 @@ export default function Items() {
     </main>
   );
 }
+ 
+ 
