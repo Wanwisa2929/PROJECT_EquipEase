@@ -11,6 +11,7 @@ function readLS(key, fallback) {
 
 export default function History() {
   const [history, setHistory] = useState([]);
+  const [selectedDate, setSelectedDate] = useState("");
 
   useEffect(() => {
     setHistory(readLS(LS_KEYS.HISTORY, []));
@@ -18,35 +19,49 @@ export default function History() {
 
   return (
     <main className="content">
-      <h1>History</h1>
-      <div className="table-container">
-        <table id="historyTable">
-          <thead>
-            <tr>
-              <th>Number</th>
-              <th>Item</th>
-              <th>Borrowing Date</th>
-              <th>Borrowing Time</th>
-              <th>Return Date</th>
-              <th>Return Time</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {history.length > 0 ? history.map((h,i)=>(
-              <tr key={h.id}>
-                <td>{String(i+1).padStart(3,'0')}</td>
-                <td>{h.item}</td>
-                <td>{h.borrowDate}</td>
-                <td>{h.borrowTime}</td>
-                <td>{h.returnDate}</td>
-                <td>{h.returnTime || "-"}</td>
-                <td>{h.status}</td>
-              </tr>
-            )) : <tr><td colSpan="7" style={{textAlign:"center",color:"#777"}}>Empty</td></tr>}
-          </tbody>
-        </table>
-      </div>
-    </main>
+  {/* ✅ ห่อ h1 + date picker ใน div เดียว */}
+  <div className="header-row">
+    <h1>History</h1>
+    <input
+      type="date"
+      className="date-picker"
+      value={selectedDate}
+      onChange={(e) => setSelectedDate(e.target.value)}
+    />
+  </div>
+
+  <div className="table-container">
+    <table id="historyTable">
+      <thead>
+        <tr>
+          <th>Number</th>
+          <th>Item</th>
+          <th>Borrowing Date</th>
+          <th>Borrowing Time</th>
+          <th>Return Date</th>
+          <th>Return Time</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {history.length > 0 ? history.map((h,i)=>(
+          <tr key={h.id}>
+            <td>{String(i+1).padStart(3,'0')}</td>
+            <td>{h.item}</td>
+            <td>{h.borrowDate}</td>
+            <td>{h.borrowTime}</td>
+            <td>{h.returnDate}</td>
+            <td>{h.returnTime || "-"}</td>
+            <td>{h.status}</td>
+          </tr>
+        )) : (
+          <tr>
+            <td colSpan="7" style={{textAlign:"center",color:"#777"}}>Empty</td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+</main>
   );
 }
