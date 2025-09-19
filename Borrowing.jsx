@@ -15,6 +15,7 @@ function writeLS(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
 export default function Borrowing() {
   const [borrowing, setBorrowing] = useState([]);
   const [popup, setPopup] = useState({ visible: false, message: "" });
+  const [selectedDate, setSelectedDate] = useState(""); // ✅ state สำหรับปฏิทิน
 
   useEffect(() => {
     setBorrowing(readLS(LS_KEYS.BORROWING, []));
@@ -49,45 +50,63 @@ export default function Borrowing() {
 
   return (
     <main className="content">
-      <h1>My Borrowing</h1>
-      <div className="table-container">
-        <table id="borrowTable">
-          <thead>
-            <tr>
-              <th>Number</th>
-              <th>Item</th>
-              <th>Borrowing Date</th>
-              <th>Borrowing Time</th>
-              <th>Return Date</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {borrowing.length > 0 ? borrowing.map((b, i) => (
-              <tr key={b.id}>
-                <td>{String(i+1).padStart(3,'0')}</td>
-                <td>{b.item}</td>
-                <td>{b.borrowDate}</td>
-                <td>{b.borrowTime}</td>
-                <td>{b.returnDate}</td>
-                <td>
-                  <button className="return-btn" onClick={()=>handleReturn(b.id)}>Return Confirm</button>
-                </td>
-              </tr>
-            )) : <tr><td colSpan="6" style={{textAlign:"center", color:"#777"}}>No current borrowing.</td></tr>}
-          </tbody>
-        </table>
-      </div>
+  {/* ✅ ย้ายเข้า container เดียวกัน */}
+  <div className="header-row">
+    <h1>My Borrowing</h1>
+    <input
+      type="date"
+      className="date-picker"
+      value={selectedDate}
+      onChange={(e) => setSelectedDate(e.target.value)}
+    />
+  </div>
 
-      {popup.visible && (
-        <div className="popup-overlay">
-          <div className="popup-card">
-            <h2>สำเร็จ</h2>
-            <p>{popup.message}</p>
-            <button className="submit-btn" onClick={()=>setPopup({visible:false,message:""})}>ปิด</button>
-          </div>
-        </div>
-      )}
-    </main>
+  <div className="table-container">
+    <table id="borrowTable">
+      <thead>
+        <tr>
+          <th>Number</th>
+          <th>Item</th>
+          <th>Borrowing Date</th>
+          <th>Borrowing Time</th>
+          <th>Return Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {borrowing.length > 0 ? borrowing.map((b, i) => (
+          <tr key={b.id}>
+            <td>{String(i+1).padStart(3,'0')}</td>
+            <td>{b.item}</td>
+            <td>{b.borrowDate}</td>
+            <td>{b.borrowTime}</td>
+            <td>{b.returnDate}</td>
+            <td>
+              <button className="return-btn" onClick={()=>handleReturn(b.id)}>
+                Return Confirm
+              </button>
+            </td>
+          </tr>
+        )) : (
+          <tr>
+            <td colSpan="6" style={{textAlign:"center", color:"#777"}}>
+              No current borrowing.
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+
+  {popup.visible && (
+    <div className="popup-overlay">
+      <div className="popup-card">
+        <h2>สำเร็จ</h2>
+        <p>{popup.message}</p>
+        <button className="submit-btn" onClick={()=>setPopup({visible:false,message:""})}>ปิด</button>
+      </div>
+    </div>
+  )}
+</main>
   );
 }
