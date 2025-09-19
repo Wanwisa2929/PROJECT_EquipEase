@@ -8,14 +8,12 @@ body, html {
   box-shadow: 2px 0 8px rgba(0,0,0,0.1);
 }
 
-
 .layout {
   display: flex;
   min-height: 100vh;
 }
 
 /* ====================== Sidebar ====================== */
-
 .sidebar {
   width: 260px;
   background: linear-gradient(180deg, #64278f 0%, #7d3fb2 60%, #ffffff 100%);
@@ -214,6 +212,85 @@ body, html {
   background-color: #c0392b;
 }
 
+/* ====================== History Page Date Picker ====================== */
+.top-right-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+}
+
+.date-picker {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  border: 2px solid #64278f;
+  border-radius: 25px;   /* ขอบมนมากขึ้น */
+  background-color: #fff;
+  color: #64278f;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+/* hover */
+.date-picker:hover {
+  border-color: #7d3fb2;
+  background-color: #f9f5ff;
+}
+
+/* focus */
+.date-picker:focus {
+  outline: none;
+  border-color: #c4996c;
+  box-shadow: 0 0 5px rgba(196,153,108,0.8);
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between; /* h1 ซ้าย, date picker ขวา */
+  align-items: center;            /* จัดแนวตั้งให้ตรงกลาง */
+  margin-bottom: 15px;
+}
+
+/* ====================== Borrowing Page Date Picker ====================== */
+.top-right-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+}
+
+.date-picker {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  border: 2px solid #64278f;
+  border-radius: 25px;   /* ขอบมน */
+  background-color: #fff;
+  color: #64278f;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.date-picker:hover {
+  border-color: #7d3fb2;
+  background-color: #f9f5ff;
+}
+
+.date-picker:focus {
+  outline: none;
+  border-color: #c4996c;
+  box-shadow: 0 0 5px rgba(196,153,108,0.8);
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between; /* h1 ซ้าย, date ขวา */
+  align-items: center;            /* จัดให้อยู่ตรงกลางแนวตั้ง */
+  margin-bottom: 15px;
+}
+
+
 /* ====================== Tables ====================== */
 .table-container {
   background-color: #fff;
@@ -257,6 +334,21 @@ tbody tr:hover {
 .status.borrowed {
   color: #eb5757;
   font-weight: bold;
+}
+
+thead th {
+  padding: 10px;
+  text-align: left;
+  user-select: none;   /* ป้องกัน text highlight ตอนคลิก */
+}
+
+thead th:hover {
+  background-color: rgba(116, 0, 183, 0.1); /* ไฮไลท์เวลาชี้ */
+}
+
+thead th span {
+  margin-left: 6px;   /* เว้นนิดเดียวให้ลูกศรไม่ชิดตัวอักษรมากเกินไป */
+  font-size: 14px;
 }
 
 /* ====================== Popup ====================== */
@@ -336,28 +428,39 @@ tbody tr:hover {
   transition: background 0.2s, transform 0.2s;
 }
 
-/* ปุ่ม Close */
+/* ปุ่ม Close ลูกศรมุมบนซ้าย */
 .popup-card .close-btn {
-  margin-top: 10px;          /* ห่างจากปุ่ม Submit เล็กน้อย */
-  padding: 10px 14px;
+  position: absolute;       /* ลอยอยู่ด้านบน */
+  top: 12px;
+  left: 12px;
+  background: none;         /* ไม่มีพื้นหลัง */
   border: none;
-  border-radius: 8px;        /* ขอบมน */
-  background-color: #ccc;    /* สีเทา */
-  color: #333;               /* ตัวอักษรเข้ม */
-  cursor: pointer;
-  font-size: 14px;
+  font-size: 22px;          /* ขนาดลูกศร */
   font-weight: bold;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s, transform 0.2s;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
 }
 
 /* Hover effect */
 .popup-card .close-btn:hover {
-  background-color: #aaa;    /* เทาเข้มขึ้นเมื่อ hover */
-  transform: translateY(-1px);
+  color: #e74c3c;           /* แดงตอน hover */
+  transform: translateX(-2px);
 }
+
+/* ต้องเพิ่ม relative ให้ popup-card เพื่อให้ position absolute ทำงาน */
+.popup-card {
+  position: relative;  /* ✅ เพิ่มบรรทัดนี้ */
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 25px 30px;
+  width: 420px;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  animation: popupShow 0.25s ease;
+}
+
 
 /* Hover effect */
 .popup-card .submit-btn:hover {
