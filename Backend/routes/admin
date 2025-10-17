@@ -1,0 +1,36 @@
+const express = require("express");
+const router = express.Router();
+const auth = require("../middleware/auth");
+const isAdmin = require("../middleware/isAdmin");
+const Borrowing = require("../models/Borrowing");
+const History = require("../models/History");
+const Item = require("../models/Item");
+
+// get borrowings (admin)
+router.get("/borrowings", auth, isAdmin, async (req,res)=>{
+  const all = await Borrowing.find().sort({ createdAt: -1 });
+  res.json(all);
+});
+
+// get history (admin)
+router.get("/history", auth, isAdmin, async (req,res)=>{
+  const h = await History.find().sort({ createdAt: -1 });
+  res.json(h);
+});
+
+// reset items
+router.post("/reset-items", auth, isAdmin, async (req,res)=>{
+  const defaults = req.body.items || [
+    { name: "Football", type: "Ball", remaining: 5 },
+    { name: "Volleyball", type: "Ball", remaining: 5 },
+    { name: "Basketball", type: "Ball", remaining: 5 },
+    { name: "Tennis Ball", type: "Ball", remaining: 5 },
+    { name: "Petanque Ball", type: "Ball", remaining: 5 },
+    { name: "Futsal Ball", type: "Ball", remaining: 5 }
+  ];
+  await Item.deleteMany({});
+  await Item.insertMany(defaults);
+  res.json({ message: "items reset" });
+});
+
+module.exports = router;
