@@ -1,0 +1,60 @@
+import React from "react";
+import { Routes, Route, Link, useLocation, Navigate } from "react-router-dom";
+import AdminBorrowing from "./AdminBorrowing";
+import AdminHistory from "./AdminHistory";
+import Profile from "../components/Profile";
+import "./Admin.css";
+
+export default function AdminLayout({ role, setRole }) {
+  const location = useLocation();
+
+  return (
+    <div className="admin-layout">
+      {/* Sidebar */}
+      <aside className="admin-sidebar">
+        <div className="admin-logo">
+          <img src="/images/Phayao.png" alt="logo" className="admin-logo-img" />
+          <h2 className="admin-logo-text">EquipEase (Admin)</h2>
+        </div>
+
+        <ul className="admin-menu">
+          <li>
+            <Link
+              to="/admin/borrowing"
+              className={
+                location.pathname.includes("/admin/borrowing") ? "active" : ""
+              }
+            >
+              Borrowing List
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/admin/history"
+              className={
+                location.pathname.includes("/admin/history") ? "active" : ""
+              }
+            >
+              History
+            </Link>
+          </li>
+        </ul>
+      </aside>
+
+      {/* Main Content */}
+      <main className="admin-main">
+        <div className="admin-topbar">
+          <Profile setRole={setRole} />
+        </div>
+
+        <div className="admin-page">
+          <Routes>
+            <Route index element={<Navigate to="borrowing" replace />} />
+            <Route path="borrowing" element={<AdminBorrowing />} />
+            <Route path="history" element={<AdminHistory />} />
+          </Routes>
+        </div>
+      </main>
+    </div>
+  );
+}
