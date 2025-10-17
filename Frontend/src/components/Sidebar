@@ -1,0 +1,35 @@
+import React from "react";
+import { NavLink } from "react-router-dom";
+
+export default function Sidebar() {
+  return (
+    <aside className="sidebar">
+      <div className="logo">
+        <img src="/images/Phayao.png" alt="Logo" />
+        <h2>EquipEase</h2>
+      </div>
+      <ul className="menu">
+        <li>
+          <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/items" className={({ isActive }) => (isActive ? "active" : "")}>
+            Items List
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/borrowing" className={({ isActive }) => (isActive ? "active" : "")}>
+            My Borrowing
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/history" className={({ isActive }) => (isActive ? "active" : "")}>
+            History
+          </NavLink>
+        </li>
+      </ul>
+    </aside>
+  );
+}
