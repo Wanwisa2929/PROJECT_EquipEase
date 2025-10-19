@@ -1,4 +1,4 @@
-/* ====================== General ====================== */
+
 body, html {
   margin: 0;
   padding: 0;
@@ -14,7 +14,7 @@ body, html {
   font-family: "Poppins", sans-serif;
 }
 
-/* ====================== Sidebar ====================== */
+
 .sidebar {
   width: 270px;
   background: linear-gradient(180deg, #64278f 0%, #7d3fb2 60%, #ffffff 100%);
@@ -34,22 +34,22 @@ body, html {
 }
 
 .sidebar .logo img {
-  width: 100%;        /* ให้ภาพเต็มความกว้าง sidebar */
+  width: 100%; 
   height: auto;
-  display: block;     /* ป้องกันช่องว่างจาก inline element */
-  margin: -25px 0 0 0;   /* 🔹 ขยับโลโก้ขึ้น 10px */
-  border-top-left-radius: 0;  /* เผื่อมี radius อยู่ */
+  display: block; 
+  margin: -25px 0 0 0; 
+  border-top-left-radius: 0; 
 }
 
 .sidebar-menu {
   list-style: none;
   width: 100%;
   padding: 0;
-  margin-top: -10px 0 0 0; /* 🔹 ให้เมนูเริ่มชิดโลโก้ */
+  margin-top: -10px 0 0 0;
 }
 
 .sidebar .logo h2 {
-  margin: 10px 0 20px 15px; /* 🔹 ขยับข้อความลงและเข้าด้านในเล็กน้อย */
+  margin: 10px 0 20px 15px;
   font-size: 22px;
   color: #fff;
   font-weight: bold;
@@ -60,7 +60,6 @@ body, html {
   opacity: 0.85;
 }
 
-/* ====================== Menu ====================== */
 .sidebar .menu {
   list-style: none;
   width: 100%;
@@ -70,10 +69,9 @@ body, html {
 
 .sidebar .menu li {
   width: 100%;
-  margin-bottom: 4px; /* 🔹 เพิ่มช่องว่างระหว่างเมนู */
+  margin-bottom: 4px; 
 }
 
-/* 🔹 เพิ่ม transition และเอฟเฟกต์ยกลอย */
 .sidebar .menu li a {
   position: relative;
   width: 100%;
@@ -86,17 +84,16 @@ body, html {
   transition: 
     background 0.3s ease,
     color 0.3s ease,
-    transform 0.3s ease; /* 🔹 ใช้สำหรับยกลอย */
+    transform 0.3s ease;
   font-size: 15px;
   font-weight: 500px;
-  border-radius: 6px; /* เพิ่มความสวยงาม */
+  border-radius: 6px;
 }
 
 .sidebar {
-  overflow: hidden; /* ✅ ป้องกันลูกเล่น hover เกินขอบ */
+  overflow: hidden;
 }
 
-/* แถบสีด้านซ้ายเมื่อ hover หรือ active */
 .sidebar .menu li a.active::before,
 .sidebar .menu li a:hover::before {
   content: "";
@@ -109,16 +106,15 @@ body, html {
   border-radius: 0 3px 3px 0;
 }
 
-/* 🔹 เอฟเฟกต์ hover – ยกลอยขึ้น */
 .sidebar .menu li a:hover {
   background-color: rgba(255, 226, 195, 0.25);
   color: #ffffff;
   font-weight: 600;
-  transform: translateY(-3px) scale(1.03); /* 🔹 ยกลอยและขยายเบาๆ */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* เพิ่มเงาให้รู้สึกลอย */
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* เอฟเฟกต์ active */
+
 .sidebar .menu li a.active {
   background-color: rgba(255, 226, 195, 0.35);
   color: #ffffff;
@@ -134,7 +130,7 @@ body, html {
   align-items: center;
   justify-content: center;
 }
-/* ====================== Content ====================== */
+
 .content {
   flex: 1;
   padding: 20px 30px;
@@ -170,7 +166,6 @@ body {
   animation: bounceIcon 0.8s ease infinite;
 }
 
-/* ====================== Cards (Home) ====================== */
 .card-container {
   display: flex;
   flex-wrap: wrap;
@@ -254,7 +249,7 @@ body {
 .card-actions .return-btn { background-color: #eb5757; }
 .card-actions .return-btn:hover { background-color: #c0392b; }
 
-/* ====================== Tables ====================== */
+
 .table-container {
   background-color: #fff;
   border-radius: 12px;
@@ -272,7 +267,7 @@ tbody tr:hover { background-color: #f9f9f9; }
 .status.available { color: #27ae60; cursor: pointer; font-weight: bold; }
 .status.borrowed { color: #eb5757; font-weight: bold; }
 
-/* ====================== Popup ====================== */
+
 .popup-overlay {
   position: fixed;
   top: 0; left: 0;
@@ -281,10 +276,10 @@ tbody tr:hover { background-color: #f9f9f9; }
   display: flex; 
   justify-content: center; 
   align-items: center;
-  z-index: 50; /* 🔽 ลดจาก 9999 เหลือ 50 */
+  z-index: 50; 
 }
 
-/* ถ้าเมนูออกจากระบบใช้ class เช่น .profile-menu */
+
 .profile-menu {
   position: absolute;
   top: 75px;
@@ -297,7 +292,7 @@ tbody tr:hover { background-color: #f9f9f9; }
   flex-direction: column;
   padding: 12px 0;
   width: 200px;
-  z-index: 100; /* 🔼 เพิ่มให้สูงกว่า popup */
+  z-index: 100; 
 }
 
 .popup-card {
@@ -324,10 +319,10 @@ tbody tr:hover { background-color: #f9f9f9; }
   color: #333;
 }
 
-/* ✅ ขยายช่องกรอกข้อความทั้งหมด */
+
 .popup-card form input,
 .popup-card form textarea {
-  width: 175%;             /* 🔹 กว้างกว่าปกติ */
+  width: 175%;             
   padding: 12px 14px;
   border-radius: 8px;
   border: 1px solid #bbb;
@@ -336,13 +331,13 @@ tbody tr:hover { background-color: #f9f9f9; }
   transition: border 0.2s, box-shadow 0.2s;
 
   position: relative;
-  left: -35%;              /* ✅ เลื่อนช่องไปทางซ้าย (ประมาณครึ่งของส่วนที่เกิน) */
+  left: -35%;              
 }
 
-/* ✅ เพิ่มเอฟเฟกต์เมื่อคลิก (focus) */
+
 .popup-card form input:focus,
 .popup-card form textarea:focus {
-  border-color: #7d3fb2;   /* ม่วงธีมเดียวกับหัวข้อ */
+  border-color: #7d3fb2;  
   box-shadow: 0 0 4px rgba(125, 63, 178, 0.4);
   outline: none;
 }
@@ -357,17 +352,18 @@ tbody tr:hover { background-color: #f9f9f9; }
   font-size: 15px;
 
   position: relative;
-  left: -35%;  /* 🔹 เลื่อน label ให้ตรงกับช่องกรอก */
+  left: -35%;  
 }
 
 .popup-card form textarea { resize: vertical; }
 
 .popup-card .submit-btn {
+  width: 80px;
   margin-top: 15px;
   padding: 10px 14px;
   border: none;
   border-radius: 8px;
-  background-color: #3ddc97;
+  background: linear-gradient(135deg, #7d3fb2, #64278f);
   color: #fff;
   cursor: pointer;
   font-size: 14px;
@@ -392,16 +388,16 @@ tbody tr:hover { background-color: #f9f9f9; }
   transition: background 0.2s, transform 0.2s;
 }
 
-/* ✅ เพิ่มระยะห่างระหว่างปุ่ม Submit และ Close */
+
 .popup-card .close-btn {
-  margin-left: 5px; /* เพิ่มช่องว่างระหว่างปุ่ม */
+  margin-left: 5px; 
 }
 
-/* ✅ กล่องจัดปุ่มให้ห่างกัน */
+
 .popup-buttons {
   display: flex;
   justify-content: center;
-  gap: 5px; /* ระยะห่างระหว่างปุ่ม */
+  gap: 5px; 
   margin-top: 5px;
 }
 
@@ -416,7 +412,6 @@ tbody tr:hover { background-color: #f9f9f9; }
   to   { transform: scale(1); opacity: 1; }
 }
 
-/* ====================== Login Page ====================== */
 .login-page {
   display: flex;
   justify-content: center;
@@ -531,16 +526,13 @@ tbody tr:hover { background-color: #f9f9f9; }
     max-width: 180px;
   }
 }
-/* Admin.css */
 
-/* Layout สำหรับหน้า Admin */
 .admin-content {
   padding: 20px;
   background-color: #f8f4ff;
   min-height: 100vh;
 }
 
-/* ชื่อหัวข้อ */
 .admin-title {
   font-size: 24px;
   font-weight: bold;
@@ -548,7 +540,6 @@ tbody tr:hover { background-color: #f9f9f9; }
   margin-bottom: 20px;
 }
 
-/* ตาราง */
 .admin-content .table-container {
   background-color: #fff;
   border-radius: 12px;
@@ -581,7 +572,6 @@ tbody tr:hover { background-color: #f9f9f9; }
   background-color: #f0e6ff;
 }
 
-/* ข้อความ No Data */
 .admin-content .no-data {
   text-align: center;
   color: #777;
